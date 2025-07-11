@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Editando a Tarefa {% endblock %}
+
+{% block content %}
+
+<div class="list-div" >
+    <h2> Editando a Tarefa '{{tarefa.titulo}}'</h2>
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form|crispy}}
+
+
+        <input type="submit" class="btn btn-info" value="Atualizar" >
+    </form>
+
+</div>
+
+
+{% endblock %}
