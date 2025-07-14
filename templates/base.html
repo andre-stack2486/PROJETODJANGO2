@@ -23,7 +23,14 @@
           <a class="nav-link" href="javascript:void(0)">Tarefas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)">Entrar</a>
+          <a class="nav-link" href="/accounts/login">Entrar</a>
+        </li>
+        <li class="nav-item">
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="nav-link active" type="submit" >Sair</button>
+          </form>
+          <a class="nav-link" href="/accounts/login">Logout</a>
         </li>
       </ul>
       <form class="d-flex">
