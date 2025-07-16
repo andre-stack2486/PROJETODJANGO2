@@ -6,15 +6,29 @@ from django.contrib.auth.decorators import  login_required
 # Create your views here.
 @login_required
 def listaTarefa(request):
-    tarefas_list = Tarefas.objects.all().order_by('-created_at')
-    return render(request, 'tarefas/list.html', {'tarefas': tarefas_list})
+    tarefas_list = Tarefas.objects.all().order_by('-created_at').filter(usuario=request.user)
+
+    search = request.GET.get('search')
+
+    if search:
+        tarefas = Tarefas.objects.filter(titulo__icontains=search, usuario=request.user)
+        return render(request, 'tarefas/list.html', {'tarefas': tarefas}) 
+
+
+    else:
+        return render(request, 'tarefas/list.html', {'tarefas': tarefas_list})
 
 @login_required
+
 def novaTarefa(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)
-        form.save()
-        return redirect('/')
+
+        if form.is_valid():
+            tf = form.save(commit=False)
+            tf.usuario = request.user
+            tf.save()
+            return redirect('/')
     
     else:
         form = TarefaForm()
