@@ -26,9 +26,6 @@
               <a class="nav-link" href="/">Tarefas</a>
             </li>
             {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="/accounts/login">Entrar</a>
-            </li>
             {% endif %}
 
             {% if user.is_authenticated %}
@@ -37,15 +34,10 @@
                 {% csrf_token %}
                 <button class="nav-link active" type="submit">Sair</button>
               </form>
-              <a class="nav-link" href="/accounts/login">Logout</a>
             </li>
             {% endif %}
             
           </ul>
-          <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Pesquisar">
-            <button class="btn btn-primary" type="button">Buscar</button>
-          </form>
         </div>
       </div>
     </nav>
